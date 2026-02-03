@@ -13,5 +13,5 @@ This repository contains AI agent skills that extend the capabilities of your AI
 To add skills to your AI agent, run:
 
 ```bash
-npx skills add https://github.com/asgarth/skills --skill hive
+npx skills add https://github.com/asgarth/hive-skills --skill hive
 ```
