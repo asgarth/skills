@@ -6,9 +6,7 @@ This repository contains AI agent skills that extend the capabilities of your AI
 
 - **hive**: Hive blockchain packed in an AI agent friendly skill.
 
-```
-⚠️ Remember to use this with a dedicated AI agent Hive account. Never share your Active key ⚠️
-```
+`⚠️ Use this skill with a dedicated AI agent Hive account. Never share your Active key ⚠️`
 
 ## Installation
 
