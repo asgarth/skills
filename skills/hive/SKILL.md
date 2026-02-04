@@ -1,14 +1,24 @@
 ---
 name: hive
 description: Hive blockchain CLI skill for querying accounts, blocks, posts, and raw API calls, uploading images, plus broadcasting votes, posts, comments, transfers, and custom JSON via hive-tx-cli.
+homepage: https://github.com/asgarth/hive-tx-cli
 metadata:
   {
-    'openclaw':
+    "openclaw":
       {
-        'emoji': '🐝',
-        'requires': { 'bins': ['hive'] },
-        'install': [{ 'id': 'npm', 'kind': 'node', 'package': '@peakd/hive-tx-cli', 'bins': ['hive'], 'label': 'Install hive-tx-cli (npm)' }]
-      }
+        "emoji": "🐝",
+        "requires": { "bins": ["hive"] },
+        "install":
+          [
+            {
+              "id": "npm",
+              "kind": "node",
+              "package": "@peakd/hive-tx-cli",
+              "bins": ["hive"],
+              "label": "Install hive-tx-cli (npm)",
+            },
+          ],
+      },
   }
 ---
 
@@ -100,9 +110,13 @@ hive broadcast '["vote",{"voter":"me","author":"you","permlink":"post","weight":
 
 ## Image Uploads
 
+If tools are available to resize or compress images, do so before uploading.
+Target ~300kb output size for images above 500kb by reducing dimensions and slightly lowering quality.
+
 ```bash
 hive upload --file ./path/to/image.jpg
-hive upload --file ./path/to/image.jpg --host https://images.ecency.com
+hive upload --file ./image.png --host https://images.ecency.com
+hive upload --file ./image.jpg --account myaccount
 ```
 
 ## Global Options
@@ -110,6 +124,9 @@ hive upload --file ./path/to/image.jpg --host https://images.ecency.com
 ```bash
 --node <url>                   # Override Hive node
 hive --node https://api.hive.blog account peakd
+
+--account <name>               # Override account for this command
+hive --account myaccount vote --author author --permlink permlink --weight 100
 ```
 
 ## Configuration File
