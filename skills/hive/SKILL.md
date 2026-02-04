@@ -1,30 +1,20 @@
 ---
 name: hive
-description: Hive blockchain CLI skill for querying accounts, blocks, posts, and raw API calls, plus broadcasting votes, comments, transfers, and custom JSON via hive-tx-cli.
-homepage: https://github.com/asgarth/hive-tx-cli
+description: Hive blockchain CLI skill for querying accounts, blocks, posts, and raw API calls, uploading images, plus broadcasting votes, posts, comments, transfers, and custom JSON via hive-tx-cli.
 metadata:
   {
-    "openclaw":
+    'openclaw':
       {
-        "emoji": "🐝",
-        "requires": { "bins": ["hive"] },
-        "install":
-          [
-            {
-              "id": "npm",
-              "kind": "node",
-              "package": "@peakd/hive-tx-cli",
-              "bins": ["hive"],
-              "label": "Install hive-tx-cli (npm)",
-            },
-          ],
-      },
+        'emoji': '🐝',
+        'requires': { 'bins': ['hive'] },
+        'install': [{ 'id': 'npm', 'kind': 'node', 'package': '@peakd/hive-tx-cli', 'bins': ['hive'], 'label': 'Install hive-tx-cli (npm)' }]
+      }
   }
 ---
 
 # Hive CLI 🐝
 
-Use the `hive` CLI (hive-tx-cli) to query the Hive blockchain and broadcast transactions with the correct key type.
+Use the `hive` CLI (hive-tx-cli) to query the Hive blockchain, upload images, and broadcast transactions with the correct key type.
 
 ## Install
 
@@ -36,6 +26,10 @@ npm install -g @peakd/hive-tx-cli
 bunx @peakd/hive-tx-cli account peakd
 ```
 
+## Requirements
+
+- Node.js >= 22.0.0
+
 ## Quick Start
 
 ```bash
@@ -46,16 +40,20 @@ hive account peakd             # Query an account
 
 ## Authentication & Keys
 
-- **Posting key**: Required for voting, commenting, posting
+- **Posting key**: Required for voting, commenting, posting, uploading images
 - **Active key**: Required for transfers and high-privilege operations
 - Keys stored in `~/.hive-cli/config.json` with 600 permissions
+- Environment variables override config file values
 
 ```bash
 hive config                    # Interactive setup
+hive config --show             # Show current configuration
+hive config --clear            # Clear all configuration
 hive config set account <name>
 hive config set postingKey <private-key>
 hive config set activeKey <private-key>
 hive config set node <url>
+hive config get account
 ```
 
 ## Query Commands
@@ -80,7 +78,7 @@ hive vote --author <author> --permlink <permlink> --weight 100
 
 ```bash
 # Create a post
-hive comment --permlink my-post --title "My Post" --body "Content" --tags "hive,blockchain"
+hive post --permlink my-post --title "My Post" --body "Content" --tags "hive,blockchain"
 
 # Create a reply
 hive comment --permlink my-reply --body "Comment" --parent-author <author> --parent-permlink <permlink>
@@ -100,14 +98,18 @@ hive custom-json --id <app-id> --json '{"key":"value"}'
 hive broadcast '["vote",{"voter":"me","author":"you","permlink":"post","weight":10000}]' --key-type posting
 ```
 
+## Image Uploads
+
+```bash
+hive upload --file ./path/to/image.jpg
+hive upload --file ./path/to/image.jpg --host https://images.ecency.com
+```
+
 ## Global Options
 
 ```bash
 --node <url>                   # Override Hive node
 hive --node https://api.hive.blog account peakd
-
---account <name>               # Override account for this command
-hive --account myaccount vote --author author --permlink permlink --weight 100
 ```
 
 ## Configuration File
@@ -121,6 +123,18 @@ hive --account myaccount vote --author author --permlink permlink --weight 100
   "activeKey": "your-active-private-key",
   "node": "https://api.hive.blog"
 }
+```
+
+Never commit private keys to version control.
+
+## Environment Variables
+
+```bash
+export HIVE_ACCOUNT="your-username"
+export HIVE_POSTING_KEY="your-posting-private-key"
+export HIVE_ACTIVE_KEY="your-active-private-key"
+
+hive vote --author author --permlink permlink --weight 100
 ```
 
 ## Troubleshooting
@@ -149,4 +163,4 @@ hive --account myaccount vote --author author --permlink permlink --weight 100
 
 ---
 
-**TL;DR**: Query with `hive account/block/content`. Broadcast with `hive vote/comment/transfer`. Configure keys via `hive config`. 🐝
+**TL;DR**: Query with `hive account/block/content`. Broadcast with `hive vote/post/comment/transfer/custom-json`. Upload with `hive upload`. Configure keys via `hive config`. 🐝
