@@ -77,12 +77,49 @@ hive vote --author <author> --permlink <permlink> --weight 100
 
 ### Posts & Comments
 
+**Body format**: Post body must be in Markdown format.
+
+**Image workflow**: If the post contains images, upload them first using `hive upload`, then insert the returned URLs into the post body before publishing.
+
 ```bash
 # Create a post
 hive post --permlink my-post --title "My Post" --body "Content" --tags "hive,blockchain"
 
 # Create a reply
 hive comment --permlink my-reply --body "Comment" --parent-author <author> --parent-permlink <permlink>
+```
+
+#### Post Metadata
+
+The `--metadata` option accepts a JSON string with post metadata. All fields are optional.
+
+**Schema:**
+
+- `app`: Application identifier (e.g., "hive-tx-cli/2026.1.1")
+- `description`: Short summary of the post content
+- `image`: Array of image URLs for the post thumbnail
+- `tags`: Array of post tags (should match --tags)
+- `users`: Array of mentioned usernames
+- `ai_tools`: Object indicating AI involvement in creating content
+  - `writing_edit`: AI assisted with writing/editing
+  - `media_generation`: AI generated images/media
+  - `research`: AI assisted with research
+  - `translation`: AI performed translation
+  - `post_draft`: AI helped draft the post
+  - `other`: Other AI assistance
+
+**Guidelines:**
+
+- Set `app` to the tool you're using
+- Include a `description` summarizing the post (1-2 sentences)
+- Add `image` URLs when the post contains images
+- If the post was created with AI assistance, set appropriate `ai_tools` flags to `true`
+
+**Example:**
+
+```bash
+hive post --permlink my-post --title "My Post" --body "Content" --tags "hive,ai" \
+  --metadata '{"app":"hive-tx-cli/2026.1.1","description":"A post about Hive and AI tools","image":["https://example.com/image.jpg"],"ai_tools":{"writing_edit":true}}'
 ```
 
 ### Transfers
