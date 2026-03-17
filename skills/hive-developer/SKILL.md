@@ -5,7 +5,7 @@ version: "2026.3.1"
 tags: ["hive", "blockchain", "typescript", "hive-tx", "transactions"]
 requirements:
   - Node.js >= 22
-  - `hive-tx` npm package
+  - hive-tx npm package
 triggers:
   - "Build Hive app logic in TypeScript"
   - "Broadcast Hive transactions safely"

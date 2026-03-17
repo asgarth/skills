@@ -1,6 +1,6 @@
 ---
 name: hive
-description: Hive blockchain CLI skill for hive-tx-cli: query accounts/content/RC/feed/replies, upload images, and broadcast publish/reply/edit/vote/transfer/community/social/profile/reward/custom-json operations with correct key usage.
+description: Hive blockchain CLI skill for hive-tx-cli. Query accounts/content/RC/feed/replies, upload images, and broadcast publish/reply/edit/vote/transfer/community/social/profile/reward/custom-json operations with correct key usage.
 homepage: https://github.com/asgarth/hive-tx-cli
 version: "2026.3.1"
 tags: ["blockchain", "hive", "cli", "broadcasting"]
@@ -17,11 +17,20 @@ triggers:
 profile: "binary-first"
 metadata:
   {
-    'openclaw':
+    "openclaw":
       {
-        'requires': { 'bins': ['hive'] },
-        'install': [{ 'id': 'npm', 'kind': 'node', 'package': '@peakd/hive-tx-cli', 'bins': ['hive'], 'label': 'Install hive-tx-cli (npm)' }]
-      }
+        "requires": { "bins": ["hive"] },
+        "install":
+          [
+            {
+              "id": "npm",
+              "kind": "node",
+              "package": "@peakd/hive-tx-cli",
+              "bins": ["hive"],
+              "label": "Install hive-tx-cli (npm)",
+            },
+          ],
+      },
   }
 ---
 
